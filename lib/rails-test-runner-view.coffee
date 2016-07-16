@@ -20,11 +20,11 @@ class RailsTestRunnerView extends ScrollView
   constructor: (filePath) ->
     super
     console.log "File path:", filePath
-    # @filePath = filePath
-    #
-    # @output  = @find(".rails-test-runner-output")
-    # @spinner = @find(".rails-test-runner-spinner")
-    # @output.on("click", @terminalClicked)
+    @filePath = filePath
+
+    @output  = @find(".rails-test-runner-output")
+    @spinner = @find(".rails-test-runner-spinner")
+    @output.on("click", @terminalClicked)
 
   serialize: ->
     deserializer: 'RailsTestRunnerView'
@@ -65,34 +65,35 @@ class RailsTestRunnerView extends ScrollView
   run: () ->
     console.log 'view run'
     # atom.workspace.saveAll() if atom.config.get("rails-test-runner.save_before_run")
-    # @spinner.show()
-    # @output.empty()
-    # projectPath = atom.project.getPaths()[0]
-    #
-    # spawn = ChildProcess.spawn
-    #
-    # # Atom saves config based on package name, so we need to use rails-test-runner here.
+    @spinner.show()
+    @output.empty()
+    projectPath = atom.project.getPaths()[0]
+
+    spawn = ChildProcess.spawn
+
+    # Atom saves config based on package name, so we need to use rails-test-runner here.
     # specCommand = atom.config.get("rails-test-runner.command")
     # options = " --tty"
     # options += " --color" if atom.config.get("rails-test-runner.force_colored_results")
-    # command = "#{specCommand} #{options} #{@filePath}"
+    testCommand = 'bin/rails test'
+    command = "#{testCommand} #{@filePath}"
     # command = "#{command}:#{lineNumber}" if lineNumber
     #
-    # console.log "[rails-test-runner] running: #{command}"
-    #
-    # terminal = spawn("bash", ["-l"])
-    #
-    # terminal.on 'close', @onClose
-    #
-    # terminal.stdout.on 'data', @onStdOut
-    # terminal.stderr.on 'data', @onStdErr
-    #
-    # terminal.stdin.write("cd #{projectPath} && #{command}\n")
-    # terminal.stdin.write("exit\n")
+    console.log "[rails-test-runner] running: #{command}"
+
+    terminal = spawn("bash", ["-l"])
+
+    terminal.on 'close', @onClose
+
+    terminal.stdout.on 'data', @onStdOut
+    terminal.stderr.on 'data', @onStdErr
+
+    terminal.stdin.write("cd #{projectPath} && #{command}\n")
+    terminal.stdin.write("exit\n")
 
   addOutput: (output) =>
-    formatter = new TextFormatter(output)
-    output = formatter.htmlEscaped().colorized().fileLinked().text
+    # formatter = new TextFormatter(output)
+    # output = formatter.htmlEscaped().colorized().fileLinked().text
 
     @spinner.hide()
     @output.append("#{output}")
