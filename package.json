@@ -6,7 +6,10 @@
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "rails-test-runner:toggle"
+    "atom-workspace": [
+      "rails-test-runner:run",
+      "rails-test-runner:run-for-line"
+    ]
   },
   "repository": "https://github.com/atom/rails-test-runner",
   "license": "MIT",
@@ -14,5 +17,6 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "atom-space-pen-views": "^2.2.0"
   }
 }

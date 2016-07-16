@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle rails-test-runner",
-        "command": "rails-test-runner:toggle"
+        "label": "run rails-test-runner",
+        "command": "rails-test-runner:run"
       }
     ]
   },
@@ -15,8 +15,8 @@
           "label": "rails-test-runner",
           "submenu": [
             {
-              "label": "Toggle",
-              "command": "rails-test-runner:toggle"
+              "label": "run",
+              "command": "rails-test-runner:run"
             }
           ]
         }
