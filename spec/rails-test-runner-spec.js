@@ -15,7 +15,7 @@ describe('RailsTestRunner', () => {
     activationPromise = atom.packages.activatePackage('rails-test-runner');
   });
 
-  describe('when the rails-test-runner:toggle event is triggered', () => {
+  describe('when the rails-test-runner:run event is triggered', () => {
     it('hides and shows the modal panel', () => {
       // Before the activation event the view is not on the DOM, and no panel
       // has been created
@@ -23,7 +23,7 @@ describe('RailsTestRunner', () => {
 
       // This is an activation event, triggering it will cause the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'rails-test-runner:toggle');
+      atom.commands.dispatch(workspaceElement, 'rails-test-runner:run');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -37,7 +37,7 @@ describe('RailsTestRunner', () => {
 
         let railsTestRunnerPanel = atom.workspace.panelForItem(railsTestRunnerElement);
         expect(railsTestRunnerPanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'rails-test-runner:toggle');
+        atom.commands.dispatch(workspaceElement, 'rails-test-runner:run');
         expect(railsTestRunnerPanel.isVisible()).toBe(false);
       });
     });
@@ -55,7 +55,7 @@ describe('RailsTestRunner', () => {
 
       // This is an activation event, triggering it causes the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'rails-test-runner:toggle');
+      atom.commands.dispatch(workspaceElement, 'rails-test-runner:run');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -65,7 +65,7 @@ describe('RailsTestRunner', () => {
         // Now we can test for view visibility
         let railsTestRunnerElement = workspaceElement.querySelector('.rails-test-runner');
         expect(railsTestRunnerElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'rails-test-runner:toggle');
+        atom.commands.dispatch(workspaceElement, 'rails-test-runner:run');
         expect(railsTestRunnerElement).not.toBeVisible();
       });
     });
