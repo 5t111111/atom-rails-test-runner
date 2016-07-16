@@ -1,0 +1,18 @@
+{
+  "name": "rails-test-runner",
+  "main": "./lib/rails-test-runner",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "rails-test-runner:toggle"
+  },
+  "repository": "https://github.com/atom/rails-test-runner",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle rails-test-runner",
+        "command": "rails-test-runner:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "rails-test-runner",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "rails-test-runner:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
