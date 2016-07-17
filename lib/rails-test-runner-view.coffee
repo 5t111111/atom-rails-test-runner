@@ -29,7 +29,11 @@ class RailsTestRunnerView extends ScrollView
     @spinner.show()
     @output.empty()
 
-    projectPath = atom.project.getPaths()[0]
+    # Get the project root and the relative path to the project.
+    [projectPath, relativePath] = atom.project.relativizePath(@filePath)
+    if !projectPath
+      @showError "File #{@filePath} is not part of a project"
+      return
 
     spawn = ChildProcess.spawn
 
