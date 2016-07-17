@@ -1,5 +1,5 @@
 {
   "atom-workspace": {
-    "ctrl-alt-o": "rails-test-runner:run"
+    "ctrl-alt-t": "rails-test-runner:run"
   }
 }

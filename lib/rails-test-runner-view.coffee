@@ -1,87 +1,42 @@
-{ $, $$$, EditorView, ScrollView } = require 'atom-space-pen-views'
+{ $$$, ScrollView } = require 'atom-space-pen-views'
 path = require 'path'
 ChildProcess  = require 'child_process'
 
 class RailsTestRunnerView extends ScrollView
-  atom.deserializers.add(this)
-
-  @deserialize: ({ filePath }) ->
-    new RailsTestRunnerView(filePath)
-
   @content: ->
-    @div class: 'rails-test-runner rails-test-runner-console', tabindex: -1, =>
-      @div class: 'rails-test-runner-spinner', 'Starting rails-test-runner...'
-      @pre class: 'rails-test-runner-output'
-
-  # initialize: ->
-  #   super
-  #   @on 'core:copy': => @copySelectedText()
+    @div class: 'rails-test-runner', tabindex: -1, =>
+      @div class: 'rails-test-runner__spinner', 'Starting test runner...'
+      @pre class: 'rails-test-runner__output'
 
   constructor: (filePath) ->
     super
-    console.log "File path:", filePath
     @filePath = filePath
-
-    @output  = @find(".rails-test-runner-output")
-    @spinner = @find(".rails-test-runner-spinner")
-    @output.on("click", @terminalClicked)
-
-  serialize: ->
-    deserializer: 'RailsTestRunnerView'
-    filePath: @getPath()
-
-  # copySelectedText: ->
-  #   text = window.getSelection().toString()
-  #   return if text == ''
-  #   atom.clipboard.write(text)
+    @output  = @find('.rails-test-runner__output')
+    @spinner = @find('.rails-test-runner__spinner')
 
   getTitle: ->
-    "rails-test-runner - #{path.basename(@getPath())}"
+    "rails-test-runner - #{path.basename(@filePath)}"
 
   getURI: ->
-    "rails-test-runner-output://#{@getPath()}"
+    "rails-test-runner-output://#{@filePath}"
 
-  getPath: ->
-    @filePath
-
-  # showError: (result) ->
-  #   failureMessage = "The error message"
-  #
-  #   @html $$$ ->
-  #     @h2 'Running rails-test-runner Failed'
-  #     @h3 failureMessage if failureMessage?
-  #
-  # terminalClicked: (e) =>
-  #   if e.target?.href
-  #     line = $(e.target).data('line')
-  #     file = $(e.target).data('file')
-  #     console.log(file)
-  #     file = "#{atom.project.getPaths()[0]}/#{file}"
-  #
-  #     promise = atom.workspace.open(file, { searchAllPanes: true, initialLine: line })
-  #     promise.done (editor) ->
-  #       editor.setCursorBufferPosition([line-1, 0])
+  showError: (result) ->
+    @html $$$ ->
+      @h2 'Running rails-test-runner Failed'
+      @h3 'An error occurred on running a test'
 
   run: () ->
-    console.log 'view run'
-    # atom.workspace.saveAll() if atom.config.get("rails-test-runner.save_before_run")
     @spinner.show()
     @output.empty()
+
     projectPath = atom.project.getPaths()[0]
 
     spawn = ChildProcess.spawn
 
-    # Atom saves config based on package name, so we need to use rails-test-runner here.
-    # specCommand = atom.config.get("rails-test-runner.command")
-    # options = " --tty"
-    # options += " --color" if atom.config.get("rails-test-runner.force_colored_results")
     testCommand = 'bin/rails test'
     command = "#{testCommand} #{@filePath}"
-    # command = "#{command}:#{lineNumber}" if lineNumber
-    #
-    console.log "[rails-test-runner] running: #{command}"
 
-    terminal = spawn("bash", ["-l"])
+    terminal = spawn('bash', ['-l'])
 
     terminal.on 'close', @onClose
 
@@ -92,9 +47,6 @@ class RailsTestRunnerView extends ScrollView
     terminal.stdin.write("exit\n")
 
   addOutput: (output) =>
-    # formatter = new TextFormatter(output)
-    # output = formatter.htmlEscaped().colorized().fileLinked().text
-
     @spinner.hide()
     @output.append("#{output}")
     @scrollTop(@[0].scrollHeight)
@@ -106,6 +58,6 @@ class RailsTestRunnerView extends ScrollView
     @addOutput data
 
   onClose: (code) =>
-    console.log "[rails-test-runner] exit with code: #{code}"
+    console.log "[rails-test-runner] exit with code: #{code}" unless code == 0
 
 module.exports = RailsTestRunnerView

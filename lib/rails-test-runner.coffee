@@ -21,19 +21,16 @@ module.exports =
     @railsTestRunnerView.destroy()
     @subscriptions.dispose()
 
-  serialize: ->
-    railsTestRunnerViewState: @railsTestRunnerView.serialize()
-
   openUriFor: (file) ->
     previousActivePane = atom.workspace.getActivePane()
     uri = "rails-test-runner-output://#{file}"
-    atom.workspace.open(uri, split: 'right', activatePane: false, searchAllPanes: true).done (railsTestRunnerView) ->
+    atom.workspace.open(uri, split: 'right', activatePane: false, searchAllPanes: true)
+    .done (railsTestRunnerView) ->
       if railsTestRunnerView instanceof RailsTestRunnerView
         railsTestRunnerView.run()
         previousActivePane.activate()
 
   run: ->
-    console.log "RUN"
     editor = atom.workspace.getActiveTextEditor()
     return unless editor?
     @openUriFor(editor.getPath())
