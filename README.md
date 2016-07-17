@@ -1,5 +1,21 @@
 # rails-test-runner package
 
-A short description of your package.
+To run Rails 5 test runner (`rails test`) without leaving Atom.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+HotKeys:
+
+- __Ctrl+Alt+T__ - executes all tests in the current file
+- __Ctrl+Alt+X__ - executes only the test on the line the cursor's at
+
+## For rbenv users
+
+When using rbenv, you have to load rbenv configuration in your `.bash_profile`
+since rails-test-runner launchs bash shell for running a test runner.
+
+## TODO
+
+- [ ] Write tests!
+
+## Thanks to
+
+[atom-rspec](https://github.com/fcoury/atom-rspec)
