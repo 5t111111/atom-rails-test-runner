@@ -2,8 +2,11 @@
   "name": "rails-test-runner",
   "main": "./lib/rails-test-runner",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "To run Rails 5 test runner (`rails test`) without leaving Atom",
   "keywords": [
+    "ruby",
+    "rails",
+    "minitest"
   ],
   "activationCommands": {
     "atom-workspace": [
@@ -11,7 +14,7 @@
       "rails-test-runner:run-for-line"
     ]
   },
-  "repository": "https://github.com/atom/rails-test-runner",
+  "repository": "https://github.com/5t111111/atom-rails-test-runner",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
