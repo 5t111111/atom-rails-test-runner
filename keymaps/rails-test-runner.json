@@ -1,5 +1,6 @@
 {
   "atom-workspace": {
-    "ctrl-alt-t": "rails-test-runner:run"
+    "ctrl-alt-t": "rails-test-runner:run",
+    "ctrl-alt-x": "rails-test-runner:run-for-line"
   }
 }
