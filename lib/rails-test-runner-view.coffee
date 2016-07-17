@@ -24,6 +24,7 @@ class RailsTestRunnerView extends ScrollView
     @html $$$ ->
       @h2 'Running rails-test-runner Failed'
       @h3 'An error occurred on running a test'
+      @div result
 
   run: (lineNumber) ->
     @spinner.show()
