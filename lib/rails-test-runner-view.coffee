@@ -24,12 +24,17 @@ class RailsTestRunnerView extends ScrollView
     @html $$$ ->
       @h2 'Running rails-test-runner Failed'
       @h3 'An error occurred on running a test'
+      @div result
 
   run: (lineNumber) ->
     @spinner.show()
     @output.empty()
 
-    projectPath = atom.project.getPaths()[0]
+    # Get the project root and the relative path to the project.
+    [projectPath, relativePath] = atom.project.relativizePath(@filePath)
+    if !projectPath
+      @showError "File #{@filePath} is not part of a project"
+      return
 
     spawn = ChildProcess.spawn
 
