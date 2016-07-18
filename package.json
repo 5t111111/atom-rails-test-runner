@@ -1,7 +1,7 @@
 {
   "name": "rails-test-runner",
   "main": "./lib/rails-test-runner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "To run Rails 5 test runner (`rails test`) without leaving Atom",
   "keywords": [
     "ruby",
