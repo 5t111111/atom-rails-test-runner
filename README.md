@@ -15,6 +15,7 @@ since rails-test-runner launchs bash shell for running a test runner.
 ## TODO
 
 - [ ] Write tests!
+- [ ] Output content should be escaped
 
 ## Thanks to
 
