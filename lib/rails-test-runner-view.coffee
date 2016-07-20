@@ -1,4 +1,4 @@
-{ $$$, ScrollView } = require 'atom-space-pen-views'
+{ $, $$$, ScrollView } = require 'atom-space-pen-views'
 path = require 'path'
 ChildProcess  = require 'child_process'
 
@@ -53,8 +53,9 @@ class RailsTestRunnerView extends ScrollView
     terminal.stdin.write("exit\n")
 
   addOutput: (output) =>
+    escaped_output = $('<div/>').text(output).html()
     @spinner.hide()
-    @output.append("#{output}")
+    @output.append("#{escaped_output}")
     @scrollTop(@[0].scrollHeight)
 
   onStdOut: (data) =>
